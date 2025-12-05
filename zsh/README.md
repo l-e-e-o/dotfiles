@@ -1,12 +1,34 @@
 # ZSH config
 I usually use [oh-my-zsh](https://ohmyz.sh/), so all of this might work on a plain zsh but I have not tested it there.
 
+## Quick-Start
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sed -i 's/^ZSH_THEME="robbyrussell"/ZSH_THEME="bureau"/' ~/.zshrc
+cat <<EOF >> ~/.zshrc
+export EDITOR='vim'
+export VISUAL=$EDITOR
+
+kn(){
+    kubectl config set-context --current --namespace=$1 > /dev/null
+}
+alias k='kubectl'
+
+alias dc="sudo docker compose"
+
+alias gca='git commit --amend'
+alias gap='git add --patch'
+alias gc='git commit'
+EOF
+```
+
 ## git
 Shortcut aliases because I'm lazy:
 
 ```sh
 alias gca='git commit --amend'
 alias gap='git add --patch'
+alias gc='git commit'
 ```
 
 ## kubectl
@@ -16,6 +38,12 @@ Alias allowing quick namespace switches like `kn kube-system`:
 kn(){
     kubectl config set-context --current --namespace=$1 > /dev/null
 }
+alias k='kubectl'
+```
+
+## docker-compose
+```sh
+alias dc="sudo docker compose"
 ```
 
 ## SSH
@@ -30,10 +58,22 @@ if (( ${+SSH_AUTH_SOCK} )) ; then
 fi
 ```
 
+For MacOS:
+
+```sh
+alias sa='ssh-add ~/.ssh/id_ed25519'
+```
+
 You might want to include some automatism to make your prompt show that the ssh-agent is active so you don't forget you still have an unlocked ssh key in this shell (see [here](#Bullettrain) for an example).
 
 
 ## Theme-specific stuff
+Theme selection:
+
+```sh
+sed -i 's/^ZSH_THEME="robbyrussell"/ZSH_THEME="bureau"/' ~/.zshrc
+```
+
 ### Bullettrain
 Customize the prompt to display the parent process if not running directly in my terminal (`alacritty`):
 
