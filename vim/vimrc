@@ -1,0 +1,44 @@
+" Surpress auto-indentation on paste
+set pastetoggle=<F2>
+" Enable paste mode by default
+set paste
+
+" Toggle line numbers
+noremap <F3> :set number! <CR>
+
+" Enable mouse support
+set mouse=a
+
+" Visible whitespaces (not working)
+" MUST be inserted BEFORE colorscheme command
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Show trailing whitespace and spaces before a tab:
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" Enable syntax highlighing
+syntax on
+
+" Configure indentation
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set shiftround
+set expandtab
+
+filetype plugin on
+filetype indent on
+
+" Optimize search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Allows to be able to set cursor behind last char at a line so you can append
+" by pressing i
+set virtualedit=block,onemore
+
+" Enable MacOS Opt-Right
+:map f w
